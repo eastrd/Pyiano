@@ -19,7 +19,7 @@ def FilterChunk(numberNotes):
     for i in range(len(Note)):
         if len(Note[i]) == 1:
             Note[i] = Note[i] + "."
-    print(Note)
+    return Note
 
 def Play_Chunk(ASM_Notes):
     for freq, time in ASM_Notes:
@@ -37,7 +37,7 @@ a = "c-x-cc-6-x z=7=6-7=6-5-33-5-z3-5-76-5-6 c-xc-x-cc-6-x z=7=6- -6=6-5-33-5-z3
 b = "6-7-z 7-zc7  36 5-6z5  4-3-4 3-4z3  -z-z-z-7 4-477  6-7-z 7-zc7  3-3-6 5-6z5  34z-7zxc-z- z-7-6756  z-x-c x-cbx  5-5-z 7-zcc   6-7-z7-z-xz 5-5 vcxzccccc  cn b cx-z- "
 
 #风之甬道
-c = "e-t-yy-u-te-t-yy-2-uu-2-3-3-3-5-4-3-2-1-uy-e-ue-t-yy-u-te-t-yy-2-uu-2-3-3-3-5-4-3-u-e-t-  e-t-yy-u-5e-t-yy-2-uu-2-3-3-3-5-4-3-2-1-"
+c = "e-t-yy-u-te-t-yy-2-uu-2-3-3-3-5-4-3-2-1-uy-e-ue-t-yy-u-te-t-yy-2-uu-2-3-3-3-5-4-3-u-e-t-  e-t-yy-u-te-t-yy-2-uu-2-3-3-3-5-4-3-2-1-"
 
 #可惜不是你
 d = "1=3-2=3=3=5- -5-3=2=2- -1=1   - -5=6-5=6=6=z- -z-5=5=5-3-2-2-2  - -2=3-2=3=3=5- -"
@@ -45,5 +45,6 @@ d = "1=3-2=3=3=5- -5-3=2=2- -1=1   - -5=6-5=6=6=z- -z-5=5=5-3-2-2-2  - -2=3-2=3=
 # Always with Me
 e = "1-2-3-1-5 3-2521-y-3 1-u uyu1-2-t12-3-44-3-2-1-2 1-2-3-1-5 3-252-2-1-y-yu-1-t tyu1-2-t12-3-44-3-2-1-1~ 3-4-55555-6-5-4-33333-4-3-2-111-u-yuu-1-22-3-2-3-2 3-4-55555-6-5-4-3333-4-3-2-1-u-yy-u-1-2-t12-3-2 2-2-1-1~    "
 f = "1-+2-3-+"
-#Play(e)
-FilterChunk(f)
+
+Play(b)
+#FilterChunk(f)
