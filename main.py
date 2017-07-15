@@ -20,6 +20,7 @@ def Interpret(numberNotes):
             ASM_Note[-1][1] += int(ASM_Note[-1][1] * extension[e])
         else:
             #妈的出错了
+            print("Current Note:",numberNotes)
             print("Error:",e,"in index",i)
             exit()
     return ASM_Note
