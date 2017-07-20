@@ -8,9 +8,10 @@ from keras.layers import LSTM
 from keras.callbacks import ModelCheckpoint
 from keras.utils import np_utils
 from notes import *
+from tools import *
 
-raw_text = "".join(AlwaysWithMe)
-raw_text += "".join(CastleInTheSky)
+StudioGhibli = song2note(AlwaysWithMe)+song2note(CastleInTheSky)
+raw_text = " ".join([str(i) for i in StudioGhibli])
 
 # create mapping of unique chars to integers
 chars = sorted(list(set(raw_text)))
@@ -19,7 +20,7 @@ char_to_int = dict((c, i) for i, c in enumerate(chars))
 n_chars = len(raw_text)
 n_vocab = len(chars)
 # prepare the dataset of input to output pairs encoded as integers
-seq_length = 5
+seq_length = 6
 dataX = []
 dataY = []
 for i in range(0, n_chars - seq_length, 1):
@@ -46,4 +47,4 @@ filepath="M:\Pyiano\model/weights-improvement-{epoch:02d}-{loss:.4f}.hdf5"
 checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=1, save_best_only=True, mode='min')
 callbacks_list = [checkpoint]
 # fit the model
-model.fit(X, y, epochs=20000, batch_size=512, callbacks=callbacks_list)
+model.fit(X, y, epochs=30000, batch_size=512, callbacks=callbacks_list)
