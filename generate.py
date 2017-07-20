@@ -9,16 +9,16 @@ from keras.callbacks import ModelCheckpoint
 from keras.utils import np_utils
 from notes import *
 from os import getcwd
+from tools import *
+import re
+
+filename = "6-29489-0.2646.hdf5"
 
 
 
-filename = "10-4984-0.6448.hdf5"
 
-
-
-
-raw_text = "".join(AlwaysWithMe)
-raw_text += "".join(CastleInTheSky)
+StudioGhibli = song2note(AlwaysWithMe)+song2note(CastleInTheSky)
+raw_text = " ".join([str(i) for i in StudioGhibli])
 # create mapping of unique chars to integers, and a reverse mapping
 chars = sorted(list(set(raw_text)))
 char_to_int = dict((c, i) for i, c in enumerate(chars))
@@ -29,7 +29,7 @@ n_vocab = len(chars)
 print("Total Characters: ", n_chars)
 print("Total Vocab: ", n_vocab)
 # prepare the dataset of input to output pairs encoded as integers
-seq_length = 30
+seq_length = 20
 dataX = []
 dataY = []
 for i in range(0, n_chars - seq_length, 1):
@@ -60,14 +60,38 @@ pattern = dataX[start]
 print("Seed:")
 print("\"", ''.join([int_to_char[value] for value in pattern]), "\"")
 # generate characters
-for i in range(100):
+generated = ""
+for i in range(200):
 	x = numpy.reshape(pattern, (1, len(pattern), 1))
 	x = x / float(n_vocab)
 	prediction = model.predict(x, verbose=0)
 	index = numpy.argmax(prediction)
 	result = int_to_char[index]
 	seq_in = [int_to_char[value] for value in pattern]
-	sys.stdout.write(result)
+	generated += result
 	pattern.append(index)
 	pattern = pattern[1:len(pattern)]
 print("\nDone.")
+print("R:")
+generated = re.sub(" +", " ", generated)
+song = []
+for num in [s for s in generated.split(" ")]:
+	if len(num) == 0:
+		continue
+	if len(num) < 3:
+		song.append(int(num))
+	else:
+		i = 0
+		j = 2
+		while j < len(num):
+			if int(num[i:j]) < 49:
+				song.append(int(num[i:j]))
+			else:
+				song.append(int(num[i]))
+				song.append(int(num[i+1:j]))
+			i += 1
+			j += 1
+
+
+
+Play(note2song(song))
