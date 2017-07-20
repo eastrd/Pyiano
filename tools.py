@@ -25,7 +25,11 @@ def note2song(note):
     # 将ID化的代号 转换回 音符+时长
     song = []
     for ele in note:
-        song.append(unique_note[ele])
+        try:
+            song.append(unique_note[ele])
+        except:
+            print("list index out of range, ignored...")
+            pass
     return song
 
 if __name__=="__main__":
